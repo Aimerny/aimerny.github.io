@@ -2,12 +2,7 @@
 <rss version="2.0">
     <channel>
         <title>Aimerny的小站</title>
-        <subtitle></subtitle>
-        <icon>https://aimerny.github.io/images/favicon.ico</icon>
         <link>https://aimerny.github.io</link>
-        <author>
-          <name>Aimerny</name>
-        </author>
         <description></description>
         <language>zh-CN</language>
         <pubDate>Fri, 05 May 2023 15:20:21 +0800</pubDate>

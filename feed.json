@@ -1,8 +1,6 @@
 {
     "version": "https://jsonfeed.org/version/1",
     "title": "Aimerny的小站",
-    "subtitle": "",
-    "icon": "https://aimerny.github.io/images/favicon.ico",
     "description": "",
     "home_page_url": "https://aimerny.github.io",
     "items": [

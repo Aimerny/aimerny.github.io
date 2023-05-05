@@ -2,12 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://aimerny.github.io</id>
     <title>Aimerny的小站</title>
-    <subtitle></subtitle>
-    <icon>https://aimerny.github.io/images/favicon.ico</icon>
     <link href="https://aimerny.github.io" />
-    <author>
-      <name>Aimerny</name>
-    </author>
     <updated>2023-05-05T07:20:21.938Z</updated>
     <entry>
         <id>https://aimerny.github.io/2023/05/05/hello-world/</id>
