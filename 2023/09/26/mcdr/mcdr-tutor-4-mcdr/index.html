@@ -1,0 +1,350 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>开设MCDR生电服教程-(4)MCDR端 | Aimerny</title><meta name="author" content="Aimerny"><meta name="copyright" content="Aimerny"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="MCDR插件端在此引用MCDReforged官方github仓库的中文介绍（原仓库地址:https:&#x2F;&#x2F;github.com&#x2F;Fallen-Breath&#x2F;MCDReforged)  MCDReforged（以下简称 MCDR）是一个可以在完全不对 Minecraft 服务端进行修改的情况下，通过可自定义的插件系统，提供对服务端的管理能力的工具 小至计算器、高亮玩家、b 站弹幕姬，大至操控计分板、管">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开设MCDR生电服教程-(4)MCDR端">
+<meta property="og:url" content="https://aimerny.github.io/2023/09/26/mcdr/mcdr-tutor-4-mcdr/index.html">
+<meta property="og:site_name" content="Aimerny">
+<meta property="og:description" content="MCDR插件端在此引用MCDReforged官方github仓库的中文介绍（原仓库地址:https:&#x2F;&#x2F;github.com&#x2F;Fallen-Breath&#x2F;MCDReforged)  MCDReforged（以下简称 MCDR）是一个可以在完全不对 Minecraft 服务端进行修改的情况下，通过可自定义的插件系统，提供对服务端的管理能力的工具 小至计算器、高亮玩家、b 站弹幕姬，大至操控计分板、管">
+<meta property="og:locale">
+<meta property="og:image" content="https://s2.loli.net/2023/09/26/mEFp8hbzJewIX42.png">
+<meta property="article:published_time" content="2023-09-25T17:14:42.000Z">
+<meta property="article:modified_time" content="2024-06-02T17:51:34.346Z">
+<meta property="article:author" content="Aimerny">
+<meta property="article:tag" content="Minecraft">
+<meta property="article:tag" content="MCDR">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/09/26/mEFp8hbzJewIX42.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://aimerny.github.io/2023/09/26/mcdr/mcdr-tutor-4-mcdr/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ZCOOL+KuaiLe&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '开设MCDR生电服教程-(4)MCDR端',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-06-03 01:51:34'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href= "/css/self.css"> <script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-camera-retro"></i><span> 图库</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2023/09/26/mEFp8hbzJewIX42.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Aimerny"><span class="site-name">Aimerny</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-camera-retro"></i><span> 图库</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">开设MCDR生电服教程-(4)MCDR端</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-09-25T17:14:42.000Z" title="Created 2023-09-26 01:14:42">2023-09-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-06-02T17:51:34.346Z" title="Updated 2024-06-03 01:51:34">2024-06-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%99%E7%A8%8B%E5%88%86%E4%BA%AB/">教程分享</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">1.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>5min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="开设MCDR生电服教程-(4)MCDR端"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="MCDR插件端"><a href="#MCDR插件端" class="headerlink" title="MCDR插件端"></a>MCDR插件端</h1><p>在此引用MCDReforged官方github仓库的中文介绍（原仓库地址:<a target="_blank" rel="noopener" href="https://github.com/Fallen-Breath/MCDReforged">https://github.com/Fallen-Breath/MCDReforged</a>)</p>
+<blockquote>
+<p><em>MCDReforged（以下简称 MCDR）是一个可以在完全不对 Minecraft 服务端进行修改的情况下，通过可自定义的插件系统，提供对服务端的管理能力的工具</em></p>
+<p><em>小至计算器、高亮玩家、b 站弹幕姬，大至操控计分板、管理结构文件、自助备份回档，都可以通过 MCDR 及相配套的插件实现</em></p>
+<p><em>非常感谢 chino_desu 以及他的 <a target="_blank" rel="noopener" href="https://github.com/kafuuchino-desu/MCDaemon">MCDaemon 1.0</a> 提出了这样一个超棒的 Minecraft 服务端控制工具的点子</em></p>
+<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a><em>优势</em></h2><ul>
+<li><em>运行于服务端之上，完全不需要修改服务端，保留原汁原味的原版特性</em></li>
+<li><em>可热重载的插件系统，无需重启服务端即可更新插件</em></li>
+<li><em>多平台/服务端的兼容性，支持在 Linux / Windows 下运行 vanilla、paper 以及 bungeecord 等服务端</em></li>
+</ul>
+<h2 id="它是如何工作的？"><a href="#它是如何工作的？" class="headerlink" title="它是如何工作的？"></a><em>它是如何工作的？</em></h2><p><em>MCDR 使用了 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/library/subprocess.html#subprocess.Popen">Popen</a> 来将服务端作为一个子进程启动，因此它便拥有了控制服务端标准输入/输出流的能力</em></p>
+<p><em>Minecraft 服务器的控制台输出拥有着稳定的输出格式，并包含着大量与服务器有关的有用信息（如玩家聊天信息）。借此，MCDR 可以解析并分析服务端输出，将他们抽象成不同的事件并派发给插件进行响应</em></p>
+<p><em>在 Minecraft 内置指令系统的帮助下，MCDR 可以通过向服务端标准输入流发送 Minecraft 指令来与 Minecraft 服务器做出交互</em></p>
+<p><em>就这样！如果你愿意的话，你可以将 MCDR 视为一个盯着服务端控制台看的，可以根据服务端的输出快速地做出响应并向服务端输入相关指令的，一个机器人</em></p>
+</blockquote>
+<p>是否很心动呢？我们来动手实装一下吧<del>（相信大家也都是冲着这个来的）</del></p>
+<h2 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h2><p>由于MCDR是一个Python工具，在这里我们需要先配置好Python。Python可以在官方网站里下载到，如果下载比较慢的话，也可以使用我提供的Python安装包。</p>
+<ol>
+<li>双击打开<code>python-3.9.5-amd64.exe</code></li>
+<li><p>勾选下方 <code>Add Python3.9 To PATH</code> ，随后点击安装(如果不想安装到C盘，可以选第二个选项自由选择位置）<br><img src="https://s2.loli.net/2024/06/03/WEirc61b52vJzMT.png" alt="image-20240603010910231" style="zoom:33%;" /></p>
+</li>
+<li><p>安装完成以后，打开powershell（或者cmd），依次输入</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看python版本</span></span><br><span class="line">python -V</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看pip版本</span></span><br><span class="line">pip -V</span><br></pre></td></tr></table></figure>
+<p>如果显示如下结果，就说明安装正常了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/aimerny/picgo@main/image-20240603011028653.png" alt="image-20240603011028653"></p>
+</li>
+<li><p>安装MCDReforged模块，使用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用国外官方源</span></span><br><span class="line">pip install mcdreforged</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果连接官方网络条件不好，推荐使用清华源，在国内使用会更快</span></span><br><span class="line">pip install mcdreforged -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
+<p>注意：<font color='red'><strong>不要直接下载MCDR源代码进行启动，除非你知道你在做什么</strong><del>（如果不知道什么是源代码就当没看到）</del></font></p>
+<p><img src="https://cdn.jsdelivr.net/gh/aimerny/picgo@main/image-20240603011231862.png" alt="image-20240603011231862" style="zoom: 50%;" /></p>
+</li>
+<li><p>校验MCDReforged是否安装成功</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mcdreforged</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/aimerny/picgo@main/image-20240603011250457.png" alt="image-20240603011250457" style="zoom:50%;" /></p>
+<p>当出现<code>MCDReforged [版本] is starting up</code>的时候，表示已经安装成功了</p>
+</li>
+</ol>
+<p>此时，MCDR启动所需要的环境配置大功告成，接下来就可以开服了。</p>
+<h2 id="开服步骤"><a href="#开服步骤" class="headerlink" title="开服步骤"></a>开服步骤</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>由于在之前一节讲了如何配置Velocity群组服，我们已经有了三个Fabric核心的子服。这里我们只用main服务器做演示，其余子服的配置类似。</p>
+<p>在之前我们的服务器结构是这样的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/aimerny/picgo@main/image-20240603013823759.png" alt="image-20240603013823759" style="zoom: 33%;" /></p>
+<blockquote>
+<p>客户端连接代理，代理连接到子服，子服为Fabric核心</p>
+</blockquote>
+<p>我们现阶段的目标是这样的：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/aimerny/picgo@main/image-20240603013853627.png" alt="image-20240603013853627" style="zoom:33%;" /></p>
+<blockquote>
+<p>客户端连接代理，代理连接到子服，子服受MCDR托管，为Fabric核心</p>
+</blockquote>
+<p>温馨提示：<font color="green">即使你没有配置群组服，也同样可以按照本教程对单个服务端进行操作</font></p>
+<h3 id="调整服务器文件夹结构"><a href="#调整服务器文件夹结构" class="headerlink" title="调整服务器文件夹结构"></a>调整服务器文件夹结构</h3><p>我们原本的文件夹结构可能是这样的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">server/</span><br><span class="line">	|-mods/</span><br><span class="line">		|- fabric-api.jar</span><br><span class="line">		|- ...</span><br><span class="line">	|-server.jar</span><br><span class="line">	|-sever.properties</span><br><span class="line">	|-start.bat</span><br><span class="line">	|-whitelist.json</span><br><span class="line">	|-...</span><br></pre></td></tr></table></figure>
+<p>这是一个服务端的文件夹，我们需要在该服务器文件夹外层再套一个文件夹用于操作MCDR，结构如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mcdr/</span><br><span class="line">	|-server</span><br><span class="line">		|-mods</span><br><span class="line">		|- fabric-api.jar</span><br><span class="line">		|- ...</span><br><span class="line">	|-server.jar</span><br><span class="line">	|-sever.properties</span><br><span class="line">	|-start.bat</span><br><span class="line">	|-whitelist.json</span><br><span class="line">	|-...</span><br></pre></td></tr></table></figure>
+<p>在这里，我让我的MCDR端文件夹名为<code>main</code> ,如图所示</p>
+<p><img src="https://cdn.jsdelivr.net/gh/aimerny/picgo@main/image-20240603014046372.png" alt="image-20240603014046372" style="zoom:50%;" /></p>
+<p>之后的所有操作，都需要在main文件夹中进行</p>
+<p><strong>温馨提示：<font color="red">此处的fabric服务器文件夹建议如示例改名为<code>server</code>，可以减少很多不必要的问题</font></strong></p>
+<h3 id="初始化MCDR端"><a href="#初始化MCDR端" class="headerlink" title="初始化MCDR端"></a>初始化MCDR端</h3><p>在main文件夹下，在上方powershell，可以在当前文件夹打开powershell窗口</p>
+<p><img src="https://cdn.jsdelivr.net/gh/aimerny/picgo@main/image-20240603014213945.png" alt="image-20240603014213945" style="zoom:50%;" /></p>
+<p><img src="https://cdn.jsdelivr.net/gh/aimerny/picgo@main/image-20240603014222965.png" alt="image-20240603014222965" style="zoom:50%;" /></p>
+<p>执行指令初始化MCDR</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mcdreforged init</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/aimerny/picgo@main/image-20240603014258041.png" alt="image-20240603014258041" style="zoom:50%;" /></p>
+<p>此时应当已经初始化完成，可以看到main文件夹下出现了一些文件夹</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">config # MCDR插件的配置文件默认存放位置</span><br><span class="line">logs # MCDR的日志信息</span><br><span class="line">plugins # MCDR插件文件夹</span><br><span class="line">server: # 服务端本体文件夹</span><br><span class="line">config.yml # MCDR配置文件</span><br><span class="line">permission.yml # MCDR权限配置文件</span><br></pre></td></tr></table></figure>
+<h2 id="配置与启动"><a href="#配置与启动" class="headerlink" title="配置与启动"></a>配置与启动</h2><p>打开<code>config.yml</code>，视个人情况修改以下配置项：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># MCDR默认语言，修改为zh_cn为中文</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">zh_cn</span></span><br><span class="line"><span class="comment"># 服务器目录，默认为server</span></span><br><span class="line"><span class="attr">working_directory:</span> <span class="string">server</span>  </span><br><span class="line"><span class="comment"># 启动命令，大部分情况下要修改</span></span><br><span class="line"><span class="comment"># 如果已经在server中存在了启动脚本，直接修改为启动脚本的文件名</span></span><br><span class="line"><span class="comment"># 如果不存在启动脚本，建议将日常使用的启动命令存储为启动脚本</span></span><br><span class="line"><span class="comment"># 如果还是不想存，就直接把命令输入到配置中吧（真拿你没办法，如果是多行命令自己想办法吧）</span></span><br><span class="line"><span class="attr">statr_command:</span> <span class="string">start.bat</span></span><br><span class="line"><span class="comment"># 处理器，示例是fabric核心，所以无需修改。如果是paper端请修改为bukkit_handler</span></span><br><span class="line"><span class="attr">handler:</span> <span class="string">vanilla_handler</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>温馨提示：<font color="red">如果是使用官方生成的启动脚本，请去掉第二行的pause</font></p>
+</blockquote>
+<p>打开permission.yml，视个人情况修改以下配置项:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># MCDR的权限分为5个等级，权限排序依次为owner,admin,helper,user,guest</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 新玩家进入默认分配的权限等级</span></span><br><span class="line"><span class="attr">default_level:</span> <span class="string">user</span></span><br><span class="line"><span class="comment"># 既然是自己开服，给自己一个owner吧(PS. 将原本的Fallen_Breath替换为自己就可以了）</span></span><br><span class="line"><span class="attr">owner:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">Zhangsan</span></span><br><span class="line"><span class="comment"># owner具有服务器完全的操作权限，包括但不限于启停服务器，管理插件，为其他玩家添加任意权限等</span></span><br></pre></td></tr></table></figure>
+<p>修改完成后，你的MCDR初始化配置已经完成了，现在再创建一个启动脚本用来方便地启动服务器吧</p>
+<p>新建一个start.bat，内容很简单，如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mcdreforged</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/aimerny/picgo@main/image-20240603014459207.png" alt="image-20240603014459207" style="zoom:50%;" /></p>
+<p>随后，双击脚本启动服务器。如果没出错的话，服务器应当已经跑起来了。如下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/aimerny/picgo@main/image-20240603014515938.png" alt="image-20240603014515938"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/aimerny/picgo@main/image-20240603014525328.png" alt="image-20240603014525328"></p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>连接到服务器，在聊天框输入<code>!!MCDR</code> 可以查看MCDR相关信息</p>
+<p><img src="https://cdn.jsdelivr.net/gh/aimerny/picgo@main/image-20240603014546660.png" alt="image-20240603014546660"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a target="_blank" rel="noopener" href="https://github.com/Aimerny">Aimerny</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://aimerny.github.io/2023/09/26/mcdr/mcdr-tutor-4-mcdr/">https://aimerny.github.io/2023/09/26/mcdr/mcdr-tutor-4-mcdr/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Minecraft/">Minecraft</a><a class="post-meta__tags" href="/tags/MCDR/">MCDR</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2023/09/26/mEFp8hbzJewIX42.png" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/09/26/mcdr/mcdr-tutor-3-velocity/" title="开设MCDR生电服教程-(3)Velocity群组服"><img class="cover" src="https://s2.loli.net/2023/09/26/9jJKU1v2gRTnOZc.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">开设MCDR生电服教程-(3)Velocity群组服</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2023/09/25/mcdr/mcdr-tutor-1-pre/" title="开设MCDR生电服教程-(1)引言"><img class="cover" src="https://s2.loli.net/2023/09/26/rSdPlHJ7Ia8Z5oR.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-25</div><div class="title">开设MCDR生电服教程-(1)引言</div></div></a></div><div><a href="/2023/09/26/mcdr/mcdr-tutor-2-fabric/" title="开设MCDR生电服教程-(2)Fabric模组服"><img class="cover" src="https://s2.loli.net/2023/09/26/nF9gU2uHIi74TCe.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-26</div><div class="title">开设MCDR生电服教程-(2)Fabric模组服</div></div></a></div><div><a href="/2023/09/26/mcdr/mcdr-tutor-3-velocity/" title="开设MCDR生电服教程-(3)Velocity群组服"><img class="cover" src="https://s2.loli.net/2023/09/26/9jJKU1v2gRTnOZc.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-26</div><div class="title">开设MCDR生电服教程-(3)Velocity群组服</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Aimerny</div><div class="author-info__description">蓦然回首,那人却在灯火阑珊处</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Aimerny"><i class="fab fa-github"></i><span>戳我一下&gt;o&lt;</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Aimerny" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:bbbxingyu@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">什么时候才能不熬夜啊</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MCDR%E6%8F%92%E4%BB%B6%E7%AB%AF"><span class="toc-text">MCDR插件端</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E5%8A%BF"><span class="toc-text">优势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%83%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F"><span class="toc-text">它是如何工作的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E7%8E%AF%E5%A2%83"><span class="toc-text">准备环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E6%9C%8D%E6%AD%A5%E9%AA%A4"><span class="toc-text">开服步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E6%95%B4%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%96%87%E4%BB%B6%E5%A4%B9%E7%BB%93%E6%9E%84"><span class="toc-text">调整服务器文件夹结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96MCDR%E7%AB%AF"><span class="toc-text">初始化MCDR端</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%90%AF%E5%8A%A8"><span class="toc-text">配置与启动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-text">测试</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/09/26/mcdr/mcdr-tutor-4-mcdr/" title="开设MCDR生电服教程-(4)MCDR端"><img src="https://s2.loli.net/2023/09/26/mEFp8hbzJewIX42.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="开设MCDR生电服教程-(4)MCDR端"/></a><div class="content"><a class="title" href="/2023/09/26/mcdr/mcdr-tutor-4-mcdr/" title="开设MCDR生电服教程-(4)MCDR端">开设MCDR生电服教程-(4)MCDR端</a><time datetime="2023-09-25T17:14:42.000Z" title="Created 2023-09-26 01:14:42">2023-09-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/26/mcdr/mcdr-tutor-3-velocity/" title="开设MCDR生电服教程-(3)Velocity群组服"><img src="https://s2.loli.net/2023/09/26/9jJKU1v2gRTnOZc.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="开设MCDR生电服教程-(3)Velocity群组服"/></a><div class="content"><a class="title" href="/2023/09/26/mcdr/mcdr-tutor-3-velocity/" title="开设MCDR生电服教程-(3)Velocity群组服">开设MCDR生电服教程-(3)Velocity群组服</a><time datetime="2023-09-25T17:14:32.000Z" title="Created 2023-09-26 01:14:32">2023-09-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/26/mcdr/mcdr-tutor-2-fabric/" title="开设MCDR生电服教程-(2)Fabric模组服"><img src="https://s2.loli.net/2023/09/26/nF9gU2uHIi74TCe.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="开设MCDR生电服教程-(2)Fabric模组服"/></a><div class="content"><a class="title" href="/2023/09/26/mcdr/mcdr-tutor-2-fabric/" title="开设MCDR生电服教程-(2)Fabric模组服">开设MCDR生电服教程-(2)Fabric模组服</a><time datetime="2023-09-25T17:14:19.000Z" title="Created 2023-09-26 01:14:19">2023-09-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/25/mcdr/mcdr-tutor-1-pre/" title="开设MCDR生电服教程-(1)引言"><img src="https://s2.loli.net/2023/09/26/rSdPlHJ7Ia8Z5oR.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="开设MCDR生电服教程-(1)引言"/></a><div class="content"><a class="title" href="/2023/09/25/mcdr/mcdr-tutor-1-pre/" title="开设MCDR生电服教程-(1)引言">开设MCDR生电服教程-(1)引言</a><time datetime="2023-09-25T12:05:17.000Z" title="Created 2023-09-25 20:05:17">2023-09-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/24/cpp-objective/" title="C++学习-面向对象"><img src="https://s2.loli.net/2023/09/26/VciKtGTNyZhB2AM.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C++学习-面向对象"/></a><div class="content"><a class="title" href="/2023/09/24/cpp-objective/" title="C++学习-面向对象">C++学习-面向对象</a><time datetime="2023-09-24T10:34:36.000Z" title="Created 2023-09-24 18:34:36">2023-09-24</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/bottom.jpeg')"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By Aimerny</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Have a good day!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addModeChange('mermaid', runMermaid)
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><div class="aplayer no-destroy" data-id="3080165816" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false"> </div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
