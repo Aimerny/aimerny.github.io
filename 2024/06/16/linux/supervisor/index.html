@@ -1,0 +1,302 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Linux-后台进程常驻管理SuperVisor | Aimerny</title><meta name="author" content="Aimerny"><meta name="copyright" content="Aimerny"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="对SuperVisor的介绍以及实践">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux-后台进程常驻管理SuperVisor">
+<meta property="og:url" content="https://aimerny.github.io/2024/06/16/linux/supervisor/index.html">
+<meta property="og:site_name" content="Aimerny">
+<meta property="og:description" content="对SuperVisor的介绍以及实践">
+<meta property="og:locale">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/aimerny/picgo@main/image-20240616185235216.png">
+<meta property="article:published_time" content="2024-06-16T10:43:20.000Z">
+<meta property="article:modified_time" content="2024-06-16T11:53:34.619Z">
+<meta property="article:author" content="Aimerny">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="SuperVisor">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/aimerny/picgo@main/image-20240616185235216.png"><link rel="shortcut icon" href="/img/favicon.svg"><link rel="canonical" href="https://aimerny.github.io/2024/06/16/linux/supervisor/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ZCOOL+KuaiLe&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Linux-后台进程常驻管理SuperVisor',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-06-16 19:53:34'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href= "/css/self.css"> <script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-camera-retro"></i><span> 图库</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/aimerny/picgo@main/image-20240616185235216.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Aimerny"><span class="site-name">Aimerny</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-camera-retro"></i><span> 图库</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Linux-后台进程常驻管理SuperVisor</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-06-16T10:43:20.000Z" title="Created 2024-06-16 18:43:20">2024-06-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-06-16T11:53:34.619Z" title="Updated 2024-06-16 19:53:34">2024-06-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">771</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>2min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Linux-后台进程常驻管理SuperVisor"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="SuperVisor安装与实践"><a href="#SuperVisor安装与实践" class="headerlink" title="SuperVisor安装与实践"></a>SuperVisor安装与实践</h1><h3 id="闲话"><a href="#闲话" class="headerlink" title="闲话"></a>闲话</h3><p>最近经常会遇到需要将一些任务长期运行的场景，需要令一些后台进程常驻。手上的开发机虽然启动方便，但是毕竟网络环境不稳定，经常需要花精力去维护。正巧手边有一台闲置的主机，就直接装了个linux用来跑各种东西。<del>家里云</del></p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>我的目的是跑一个python脚本，并且伴随机器启动时自动启动。在linux的众多进程托管工具中，结合普遍性，考虑了<strong>systemd</strong>以及<strong>supervisor</strong>。之后又经过了一系列横向对比，还是决定使用supervisor来处理。</p>
+<ol>
+<li>Systemd配置相比supervisor更加复杂，不易上手</li>
+<li>supervior存在着进程组的管理，可以对多个进程统一管理</li>
+</ol>
+<p>由于是自己个人用的东西，性能占用也并不高，所以对于性能并没有做过多考量。</p>
+<h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><p>操作系统: Ubuntu LTS 22.04</p>
+<p>系统架构: x86_64</p>
+<p>配置用户: root</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>首先需要安装supervisor, 其为python编写的程序，可通过以下方式安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装supervisor</span></span><br><span class="line">apt install supervisor</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置supervisord服务开机自启</span></span><br><span class="line">systemctl enable supervisor</span><br></pre></td></tr></table></figure>
+<p>此时supervisor便安装完成，如果无法install，需自行更换apt镜像源</p>
+<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>supervisor有如下指令可使用</p>
+<ul>
+<li><code>supervisorctl</code>：进入命令行交互界面，可直接输入子命令进行管理。</li>
+<li><code>supervisorctl reload</code>：重新加载配置文件，并重启supervisord及所有自动启动的程序。</li>
+<li><code>supervisorctl restart &#123;PROGRAM&lt; ...&gt;&#125;|all</code>：重启程序，all表示重启所有程序。</li>
+<li><code>supervisorctl start &#123;PROGRAM&lt; ...&gt;&#125;|all</code>：启动程序，all表示启动所有程序。</li>
+<li><code>supervisorctl status &lt;&#123;PROGRAM&lt; ...&gt;&#125;|all&gt;</code>：查看程序状态，如为all或不指定则查看所有程序状态。</li>
+<li><code>supervisorctl stop &#123;PROGRAM&lt; ...&gt;&#125;|all</code>：停止程序，all表示停止所有程序。</li>
+<li><code>supervisorctl update</code>：重新加载配置文件，并启动新配置指定的程序。</li>
+</ul>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>安装好后，便可以进行任务的配置，supervisor的任务的配置文件都位于:<code>/etc/supervisor/conf.d/</code></p>
+<p>任务的配置文件应为: <code>&lt;task-name&gt;.conf</code></p>
+<p>此处我使用自己的脚本配置文件</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[program:week-bot]</span> <span class="comment"># program:[name] 指定该任务的名称为week-bot</span></span><br><span class="line"><span class="comment"># 自动重启</span></span><br><span class="line"><span class="attr">autorestart</span>=<span class="literal">True</span></span><br><span class="line"><span class="comment"># 自动启动</span></span><br><span class="line"><span class="attr">autostart</span>=<span class="literal">True</span></span><br><span class="line"><span class="comment"># 标准err输出重定向</span></span><br><span class="line"><span class="attr">redirect_stderr</span>=<span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># === 启动细节 ===</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 环境变量，此处指定了python运行的conda环境</span></span><br><span class="line"><span class="attr">environment</span>=CONDA_PREFIX=<span class="string">&quot;/home/aim/anaconda3/envs/common39&quot;</span></span><br><span class="line"><span class="comment"># 启动指令</span></span><br><span class="line"><span class="attr">command</span>=python -u robot_new.py</span><br><span class="line"><span class="comment"># 以指定用户启动</span></span><br><span class="line"><span class="attr">user</span>=aim</span><br><span class="line"><span class="comment"># 工作目录</span></span><br><span class="line"><span class="attr">directory</span>=/home/aim/Documents/week_bot</span><br><span class="line"></span><br><span class="line"><span class="comment"># === 日志配置 ===</span></span><br><span class="line"><span class="comment"># 日志最大大小</span></span><br><span class="line"><span class="attr">stdout_logfile_maxbytes</span> = <span class="number">20</span>MB</span><br><span class="line"><span class="comment"># 日志的存档数量</span></span><br><span class="line"><span class="attr">stdout_logfile_backups</span> = <span class="number">20</span></span><br><span class="line"><span class="comment"># 指定标准输出日志文件</span></span><br><span class="line"><span class="attr">stdout_logfile</span>=/home/aim/Documents/week_bot/log/info.log</span><br><span class="line"><span class="comment"># 指定标准错误日志文件</span></span><br><span class="line"><span class="attr">stderr_logfile</span>=/home/aim/Documents/week_bot/log/error.log</span><br></pre></td></tr></table></figure>
+<blockquote>
+<font color="red">**注: 此处logfile配置的文件夹需存在**</font>
+
+</blockquote>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p>保存好改配置文件后，即可启动服务，执行:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">刷新任务配置</span></span><br><span class="line">supervisorctl reread</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动</span></span><br><span class="line">supervisorctl start week-bot</span><br></pre></td></tr></table></figure>
+<p>服务正常启动，日志正常写入，配置完成。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a target="_blank" rel="noopener" href="https://github.com/Aimerny">Aimerny</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://aimerny.github.io/2024/06/16/linux/supervisor/">https://aimerny.github.io/2024/06/16/linux/supervisor/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a><a class="post-meta__tags" href="/tags/SuperVisor/">SuperVisor</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/aimerny/picgo@main/image-20240616185235216.png" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/09/26/mcdr/mcdr-tutor-4-mcdr/" title="开设MCDR生电服教程-(4)MCDR端"><img class="cover" src="https://s2.loli.net/2023/09/26/mEFp8hbzJewIX42.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">开设MCDR生电服教程-(4)MCDR端</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Aimerny</div><div class="author-info__description">蓦然回首,那人却在灯火阑珊处</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Aimerny"><i class="fab fa-github"></i><span>戳我一下&gt;o&lt;</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Aimerny" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:bbbxingyu@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">什么时候才能不熬夜啊</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SuperVisor%E5%AE%89%E8%A3%85%E4%B8%8E%E5%AE%9E%E8%B7%B5"><span class="toc-number">1.</span> <span class="toc-text">SuperVisor安装与实践</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%B2%E8%AF%9D"><span class="toc-number">1.0.1.</span> <span class="toc-text">闲话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-number">1.0.2.</span> <span class="toc-text">问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="toc-number">1.0.3.</span> <span class="toc-text">环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">1.0.4.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4"><span class="toc-number">1.0.5.</span> <span class="toc-text">指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-number">1.0.6.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8"><span class="toc-number">1.0.7.</span> <span class="toc-text">启动</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/06/16/linux/supervisor/" title="Linux-后台进程常驻管理SuperVisor"><img src="https://cdn.jsdelivr.net/gh/aimerny/picgo@main/image-20240616185235216.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux-后台进程常驻管理SuperVisor"/></a><div class="content"><a class="title" href="/2024/06/16/linux/supervisor/" title="Linux-后台进程常驻管理SuperVisor">Linux-后台进程常驻管理SuperVisor</a><time datetime="2024-06-16T10:43:20.000Z" title="Created 2024-06-16 18:43:20">2024-06-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/26/mcdr/mcdr-tutor-4-mcdr/" title="开设MCDR生电服教程-(4)MCDR端"><img src="https://s2.loli.net/2023/09/26/mEFp8hbzJewIX42.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="开设MCDR生电服教程-(4)MCDR端"/></a><div class="content"><a class="title" href="/2023/09/26/mcdr/mcdr-tutor-4-mcdr/" title="开设MCDR生电服教程-(4)MCDR端">开设MCDR生电服教程-(4)MCDR端</a><time datetime="2023-09-25T17:14:42.000Z" title="Created 2023-09-26 01:14:42">2023-09-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/26/mcdr/mcdr-tutor-3-velocity/" title="开设MCDR生电服教程-(3)Velocity群组服"><img src="https://s2.loli.net/2023/09/26/9jJKU1v2gRTnOZc.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="开设MCDR生电服教程-(3)Velocity群组服"/></a><div class="content"><a class="title" href="/2023/09/26/mcdr/mcdr-tutor-3-velocity/" title="开设MCDR生电服教程-(3)Velocity群组服">开设MCDR生电服教程-(3)Velocity群组服</a><time datetime="2023-09-25T17:14:32.000Z" title="Created 2023-09-26 01:14:32">2023-09-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/26/mcdr/mcdr-tutor-2-fabric/" title="开设MCDR生电服教程-(2)Fabric模组服"><img src="https://s2.loli.net/2023/09/26/nF9gU2uHIi74TCe.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="开设MCDR生电服教程-(2)Fabric模组服"/></a><div class="content"><a class="title" href="/2023/09/26/mcdr/mcdr-tutor-2-fabric/" title="开设MCDR生电服教程-(2)Fabric模组服">开设MCDR生电服教程-(2)Fabric模组服</a><time datetime="2023-09-25T17:14:19.000Z" title="Created 2023-09-26 01:14:19">2023-09-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/25/mcdr/mcdr-tutor-1-pre/" title="开设MCDR生电服教程-(1)引言"><img src="https://s2.loli.net/2023/09/26/rSdPlHJ7Ia8Z5oR.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="开设MCDR生电服教程-(1)引言"/></a><div class="content"><a class="title" href="/2023/09/25/mcdr/mcdr-tutor-1-pre/" title="开设MCDR生电服教程-(1)引言">开设MCDR生电服教程-(1)引言</a><time datetime="2023-09-25T12:05:17.000Z" title="Created 2023-09-25 20:05:17">2023-09-25</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/bottom.jpeg')"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By Aimerny</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Have a good day!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addModeChange('mermaid', runMermaid)
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><div class="aplayer no-destroy" data-id="3080165816" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false"> </div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
